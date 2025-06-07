@@ -1,0 +1,81 @@
+header {
+    display: flex;
+  }
+  
+  header > div {
+    border: 1px solid #333;
+    padding: 17px;
+    flex: 1;
+    text-align: center;
+    font-size: 22px;
+    background-color: #C8EBFC; /* 通常の背景色 */
+    cursor: pointer;           /* クリックできるカーソルに */
+  }
+  
+  /* 選択されたヘッダー項目の背景色だけ変更 */
+  header > div.active {
+    background-color: #36A5F4; /* 選択中の背景色 */
+    color: white;              /* 白文字にして見やすく */
+  }
+  
+  
+  .page-title {
+    position: relative;      
+    padding-left: 24px;      /* 線が太くなった分、余白も広げる */
+    font-size: 24px;
+    color: #333;
+    margin-left: 50px;
+    margin-top: 30px;
+    line-height: 1.5;        /* テキストが高くなる場合に対応 */
+  }
+  
+  .page-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -6px;               /* 少し上に伸ばす */
+    height: 124%;            /* 線を文字より長くする */
+    width: 8px;             /* 線を太くする（例：10px） */
+    background-color: #C8EBFC;
+    border-radius: 2px;
+  }
+  
+  
+  /* style.css に追加 */
+  .right-image {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: 20px;
+  }
+
+  .container {
+    display: flex;
+    align-items: flex-start;   /* 縦方向上揃え */
+    justify-content: flex-end; /* 右寄せ */
+    gap: 10px;
+  }
+  
+  .photo {
+    width: 600px;      /* 大きめに設定 */
+    height: auto;
+    object-fit: cover;
+    margin-top: 20px;
+  }
+  
+  .text-box {
+    width: 477px;
+    height: 62px;
+    color: #000000;
+    font-size: 24px;
+    text-align: right;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    overflow: hidden;
+    flex-shrink: 0;
+    padding-top: 4px;
+  }
+  
+
+  

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FindMySchool</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/style.css">
+  
+
+</head>
+
+<body class="text-start">
+
+  <header>
+    <div onclick="location.href='index.html'" style="cursor:pointer;">Home　ホーム</div>
+    <div onclick="location.href='search.html'" style="cursor:pointer;">Search　学校検索</div>
+    <div class="active" onclick="location.href='Login.html'" style="cursor:pointer;">Login　ログイン</div>
+    <div onclick="location.href='signup.html'" style="cursor:pointer;">Sign up　新規登録</div>
+  </header>
+  
+  
+  <h1 class="page-title">ログイン　Login</h1>
+
+  <div class="container text-center">
+    <div class="row justify-content-center">
+      <form class="col-md-4">
+        <div class="mb-3">
+          <input type="email" class="form-control" placeholder="mail address" />
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" placeholder="password" />
+        </div>
+
+        <!-- 通常ログインボタン -->
+        <button type="button" class="login-button">Login</button>
+
+        <hr />
+
+        <p class="text-center" style="color:#6696FE; font-size: 24px;">Forget your password?</p>
+
+        <button type="button" class="newaccount-button">Create new account</button>
+
+        <hr />
+
+        <!-- Googleログインボタン -->
+        <button type="button" id="googleLoginBtn" class="btn btn-outline-primary w-100">
+          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" style="width:20px; margin-right:8px; vertical-align:middle;">
+          Googleでログイン
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+
+  <!-- Firebase 互換版SDKの読み込み -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // Firebase設定
+    const firebaseConfig = {
+      apiKey: "AIzaSyCKVpmfSuJTh9lzaU0vbSzKDowP2TX60wM",
+      authDomain: "findmyschool-d10a1.firebaseapp.com",
+      projectId: "findmyschool-d10a1",
+      storageBucket: "findmyschool-d10a1.appspot.com",
+      messagingSenderId: "101858351275",
+      appId: "1:101858351275:web:2cea332dfaed60dc6a7fee",
+      measurementId: "G-XXMH2FE4QJ"
+    };
+
+    // Firebase初期化
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Google認証プロバイダー準備
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    // Googleログインボタンクリック処理
+    document.getElementById('googleLoginBtn').addEventListener('click', () => {
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          const user = result.user;
+          alert(`ようこそ、${user.displayName}さん！`);
+          console.log(user);
+          // ログイン成功後の処理（例：ダッシュボードへ遷移）
+            window.location.href = "index_user.html";
+        })
+        .catch((error) => {
+          alert("ログインに失敗しました");
+          console.error(error);
+        });
+    });
+
+    // ヘッダークリック処理
+    function setPageTitle(element) {
+      document.querySelector('.page-title').textContent = element.textContent;
+      document.querySelectorAll('header > div').forEach(div => div.classList.remove('active'));
+      element.classList.add('active');
+    }
+    document.querySelectorAll('header > div').forEach(div => {
+      div.addEventListener('click', function () {
+        setPageTitle(this);
+      });
+    });
+  </script>
+</body>
+</html>

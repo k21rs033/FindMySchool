@@ -85,9 +85,13 @@
       auth.signInWithPopup(provider)
         .then((result) => {
           const user = result.user;
-          alert(`ようこそ、${user.displayName}さん！`);
+          const uid = user.uid;
+          const uname = user.displayName;
+          //const uid = result
+          alert(`ようこそ、${user.displayName}さん！${user.id}`);
           console.log(user);
           // ログイン成功後の処理（例：ダッシュボードへ遷移）
+          if(user.email == "mizukika21@gmail.com")
             window.location.href = "index_user.html";
         })
         .catch((error) => {
